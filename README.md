@@ -9,7 +9,7 @@ python3 should be installed
 ## Setup
 * Clone the repo
 ```
-git clone -b sdk https://github.com/Neel1781/testchall-1.git
+git clone -b sdk https://github.com/Neel1781/Technical_Challenge.git
 ``` 
 * Install packages through requirements.txt
 ```
