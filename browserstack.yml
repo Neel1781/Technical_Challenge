@@ -1,0 +1,22 @@
+userName: neelpatel_lrmtiW
+accessKey: uVmiFwS6kCvB4Ahv1sjp
+platforms:
+  - os: Windows
+    osVersion: 10
+    browserName: Chrome
+    browserVersion: 120.0
+  - os: OS X
+    osVersion: Ventura
+    browserName: Firefox
+    browserVersion: latest-beta
+  - deviceName: Samsung Galaxy S22
+    osVersion: 12.0
+    browserName: samsung
+    deviceOrientation: portrait
+browserstackLocal: true
+buildName: bstack-demo
+buildIdentifier: ${BUILD_NUMBER}
+projectName: BrowserStack Sample
+debug: true
+networkLogs: true
+consoleLogs: info
