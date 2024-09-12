@@ -6,20 +6,23 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options as Chromeoptions
 
 import time
 
 # Setup Chrome options
-chrome_options = Options()
-chrome_options.add_argument('--ignore-certificate-errors')
+#chrome_options = Options()
+#chrome_options.add_argument('--ignore-certificate-errors')
+
+options = Chromeoptions()
+driver = webdriver.Chrome(options=options)
 
 
 # Path to your chromedriver
-chrome_driver_path = r'C:\Users\neels\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe'
+#chrome_driver_path = r'C:\Users\neels\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe'
 
 # Initialize WebDriver
-driver = webdriver.Chrome(service=Service(chrome_driver_path), options=chrome_options)
+#driver = webdriver.Chrome(service=Service(chrome_driver_path), options=chrome_options)
 #driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get('https://bstackdemo.com/')
 
@@ -27,46 +30,30 @@ driver.get('https://bstackdemo.com/')
 def wait_for_element(by, value, timeout=20):
     try:
         return WebDriverWait(driver, timeout).until(EC.visibility_of_element_located((by, value)))
-    except TimeoutException:
+    except:
         print(f"Element not found: {by} = {value}")
         driver.quit()
 
 try:
-    print("Trying to find login button...")
     login_button = driver.find_element(by=By.CSS_SELECTOR, value="#signin")
     #login_button = wait_for_element(By.XPATH, '//*[@id="signin"]')
     login_button.click()
 
     action = ActionChains(driver)
+
     # Enter credentials
     username_input = wait_for_element(By.XPATH,'//*[@id="username"]/div/div[1]/div[1]') 
     username_input.click() 
-    username = wait_for_element(by=By.CSS_SELECTOR,value="#react-select-2-option-0-0")
-    username.click()
-    #username_input.send_keys("demouser")
-    #username_input.send_keys(Keys.ENTER)
+    actions = ActionChains(driver)
+    actions.send_keys("demouser").send_keys(Keys.ENTER).perform()
     
-    
+    # Enter the password into the field
     password_input = wait_for_element(By.XPATH, '//*[@id="password"]/div/div[1]')
-    password_input.click()
-    #wait = WebDriverWait(driver, 10)   
+    password_input.click() 
     actions = ActionChains(driver)
     actions.send_keys("testingisfun99").send_keys(Keys.ENTER).perform()
+   
     
-    #password = driver.find_element(by=By.ID,value="password")
-    #password.click()
-    #password_input.send_keys("testingisfun99")
-    #password_option = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#react-select-3-option-0-0")))
-    #password_option.click()
-    #password = wait_for_element(by=By.CSS_SELECTOR,value="#react-select-3-option-0-0")
-    #password_input = wait_for_element(by=By.CSS_SELECTOR, value="input[type='password']")
-
-    # Enter the password into the field
-    #password_input.send_keys("testingisfun99")
-    #password.click()
-    #password_input.send_keys("testingisfun99")
-    #password_input.send_keys(Keys.ENTER)
-
     
     # Submit login form
     login_submit_button = wait_for_element(By.XPATH, '//*[@id="login-btn"]')
@@ -76,8 +63,6 @@ try:
     time.sleep(3)
 
     # Filter products to show "Samsung" devices only
-    #filter_button = wait_for_element(By.XPATH, '//button[text()="Filter"]')
-    #filter_button.click()
     samsung_filter = wait_for_element(By.XPATH, '//*[@id="__next"]/div/div/main/div[1]/div[2]/label/span')
     samsung_filter.click()
     
