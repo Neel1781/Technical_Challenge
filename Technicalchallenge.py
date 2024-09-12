@@ -11,19 +11,9 @@ from selenium.webdriver.chrome.options import Options as Chromeoptions
 import time
 
 # Setup Chrome options
-#chrome_options = Options()
-#chrome_options.add_argument('--ignore-certificate-errors')
-
 options = Chromeoptions()
 driver = webdriver.Chrome(options=options)
 
-
-# Path to your chromedriver
-#chrome_driver_path = r'C:\Users\neels\Downloads\chromedriver-win64\chromedriver-win64\chromedriver.exe'
-
-# Initialize WebDriver
-#driver = webdriver.Chrome(service=Service(chrome_driver_path), options=chrome_options)
-#driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get('https://bstackdemo.com/')
 
 
